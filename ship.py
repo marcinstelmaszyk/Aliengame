@@ -17,12 +17,15 @@ class Ship():
 
         #Opcje wskazujące na poruszanie się statku
         self.moving_right = False
+        self.moving_left  = False
 
     def update(self):
         '''
-        Uaktualnienie położenia statku na podstawie opcji wskazującegj na jego ruch'''
+        Uaktualnienie położenia statku na podstawie opcji wskazującej na jego ruch'''
         if self.moving_right:
             self.rect.centerx += 1
+        if self.moving_left:
+            self.rect.centerx -= 1
 
     def blitme(self):
         '''Wyświetlenie statku kosmicznego w jego aktualnym położeniu'''
