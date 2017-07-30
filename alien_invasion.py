@@ -11,7 +11,7 @@ def run_game():
     pygame.display.set_caption("Inwazja obcych")
     
     #Utworzenie statku kosmicznego
-    ship = Ship(screen)
+    ship = Ship(ai_settings, screen)
 
     while True:
         gf.check_events(ship)
