@@ -9,6 +9,7 @@ class Ship():
 
         #Wczytanie obrazu statku kosmicznego i pobranie jego prostokąta
         self.image = pygame.image.load('images/ship.bmp')
+        self.image = pygame.transform.rotate(self.image, -90)
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
@@ -27,11 +28,12 @@ class Ship():
         '''
         Uaktualnienie położenia statku na podstawie opcji wskazującej na jego ruch
         '''        
-        print(self.rect.top , self.screen_rect.top)
-        if self.moving_down and self.rect.top > self.screen_rect.top:
-            self.center += self.ai_settings.ship_speed_factor            
-        if self.moving_up and self.rect.bottom < self.screen_rect.bottom:
+        
+        if self.moving_up and self.rect.top > self.screen_rect.top:
             self.center -= self.ai_settings.ship_speed_factor
+        if self.moving_down and self.rect.bottom < self.screen_rect.bottom:
+            self.center += self.ai_settings.ship_speed_factor            
+        
 
         # Uaktualnienie obiektu rect na podstawie wartości self.center
         self.rect.centery = self.center

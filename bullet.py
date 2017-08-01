@@ -9,12 +9,12 @@ class Bullet(Sprite):
         self.screen = screen
 
         # Utworzenie prostokąta pocisku w punkcie (0, 0), a następnie zdefiniowanie dla niego odpowiedniego położenia
-        self.rect = pygame.Rect(0, 0, ai_settings.bullet_width, ai_settings.bullet_height)
-        self.rect.centerx = ship.rect.centerx
-        self.rect.top = ship.rect.top
+        self.rect = pygame.Rect(0, 0, ai_settings.bullet_height, ai_settings.bullet_width)
+        self.rect.centery = ship.rect.centery
+        self.rect.right = ship.rect.right
 
         # Położenie pocisku jest zdefiniowane za pomocą wartości zmiennoprzecinkowej
-        self.y = float(self.rect.y)
+        self.x = float(self.rect.x)
 
         self.color = ai_settings.bullet_color
         self.speed_factor = ai_settings.bullet_speed_factor
@@ -22,9 +22,9 @@ class Bullet(Sprite):
     def update(self):
         '''Poruszanie pociskiem po ekranie'''
         # Uaktualnienie położenia pocisku
-        self.y -= self.speed_factor
+        self.x += self.speed_factor
         # Uaktualnienie położenia prostokąta pocisku
-        self.rect.y = self.y
+        self.rect.x = self.x
 
     def draw_bullet(self):
         '''Wyświetlenie pocisku na ekranie'''

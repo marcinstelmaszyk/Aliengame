@@ -38,12 +38,13 @@ def update_screen(ai_settings, screen, ship, bullets):
        
     pygame.display.flip()
 
-def update_bullets(bullets):
+def update_bullets(screen, bullets):
     bullets.update()
 
+    screen_rect = screen.get_rect()
     # Usunięcie pocisków, które znajdą się poza ekranem
     for bullet in bullets.copy():
-        if bullet.rect.bottom < 0:
+        if bullet.rect.left > screen_rect.right:
             bullets.remove(bullet)
 
 def fire_bullet(ai_settings, screen, ship, bullets):
