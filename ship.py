@@ -12,28 +12,29 @@ class Ship():
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
-        #Każdy nowy statek kosmiczny pojawia się na dole ekranu
-        self.rect.centerx = self.screen_rect.centerx
-        self.rect.bottom = self.screen_rect.bottom
+        #Każdy nowy statek kosmiczny pojawia się po lewej stronie ekranu
+        self.rect.centery = self.screen_rect.centery
+        self.rect.left = self.screen_rect.left
 
         # Punkt środkowy statku jest przechowywany w postaci liczby zmiennoprzecinkowej
-        self.center = float(self.rect.centerx)
+        self.center = float(self.rect.centery)
 
         #Opcje wskazujące na poruszanie się statku
-        self.moving_right = False
-        self.moving_left  = False
+        self.moving_up = False
+        self.moving_down  = False
 
     def update(self):
         '''
         Uaktualnienie położenia statku na podstawie opcji wskazującej na jego ruch
-        '''
-        if self.moving_right and self.rect.right < self.screen_rect.right:
-            self.center += self.ai_settings.ship_speed_factor
-        if self.moving_left and self.rect.left > self.screen_rect.left:
+        '''        
+        print(self.rect.top , self.screen_rect.top)
+        if self.moving_down and self.rect.top > self.screen_rect.top:
+            self.center += self.ai_settings.ship_speed_factor            
+        if self.moving_up and self.rect.bottom < self.screen_rect.bottom:
             self.center -= self.ai_settings.ship_speed_factor
 
         # Uaktualnienie obiektu rect na podstawie wartości self.center
-        self.rect.centerx = self.center
+        self.rect.centery = self.center
 
     def blitme(self):
         '''Wyświetlenie statku kosmicznego w jego aktualnym położeniu'''
