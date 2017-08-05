@@ -9,6 +9,7 @@ class Settings():
 
         # Ustawienie dotyczące statku
         self.ship_speed_factor = 1.5
+        self.ship_limit = 3
 
         # Ustawienie dotyczące obcego
         self.alien_speed_factor = 1
