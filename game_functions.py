@@ -4,7 +4,7 @@ from bullet import Bullet
 from alien import Alien
 import pygame
 
-def check_keydown_events(event, ai_settings, screen, ship, bullets):
+def check_keydown_events(event, ai_settings, screen, stats, ship, aliens, bullets):
     '''Reakcja na naciśnięcie klawisza.'''
     if event.key == pygame.K_RIGHT:
         ship.moving_right = True
@@ -12,6 +12,8 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
         ship.moving_left = True
     elif event.key == pygame.K_SPACE:
         fire_bullet(ai_settings, screen, ship, bullets)
+    elif event.key == pygame.K_g:
+        start_game(ai_settings, screen, stats, ship, aliens, bullets)
     elif event.key == pygame.K_q:
         sys.exit()
 
@@ -28,7 +30,7 @@ def check_events(ai_settings, screen, stats, play_button, ship, aliens, bullets)
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            check_keydown_events(event, ai_settings, screen, ship, bullets)
+            check_keydown_events(event, ai_settings, screen, stats, ship, aliens, bullets)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
         elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -39,6 +41,11 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bul
     '''Rozpoczęcie nowej gry po kliknięciu przycisku Gra przez użytkownika'''
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked and not stats.game_active:
+        start_game(ai_settings, screen, stats, ship, aliens, bullets)
+
+def start_game(ai_settings, screen, stats, ship, aliens, bullets):
+    '''Rozpoczęcie gry poprzez wywołanie domyślnych ustawień.'''
+    if not stats.game_active:
         # Ukrycie kursora myszy
         pygame.mouse.set_visible(False)
         # Wyzerowanie danych statystycznych gry
@@ -50,7 +57,6 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bul
         # Utworzenie nowej floty i wyśrodkowanie statku
         create_fleet(ai_settings, screen, ship, aliens)
         ship.center_ship()
-        
 
 def update_screen(ai_settings, screen, stats, ship, aliens, bullets, play_button):
     '''Uaktualnienie obrazów na ekranie i przejście do nowego ekranu.'''
