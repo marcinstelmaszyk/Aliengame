@@ -7,6 +7,9 @@ class Settings():
         self.screen_height = 800
         self.bg_color = (230, 230, 230)
 
+        # Punktacja.
+        self.alien_points = 50
+
         # Ustawienie dotyczące statku kosmicznego        
         self.ship_limit = 3
 
@@ -21,6 +24,8 @@ class Settings():
 
         # Zmiana szybkości gry
         self.speedup_scale = 1.1
+        # Zmiana liczby punktów przyznawanych za zestrzelenie obcego
+        self.score_scale = 1.5
 
         self.initialize_dynamic_settings()
 
@@ -38,4 +43,6 @@ class Settings():
         '''Zmiana ustawień dotyczących szybkości.'''
         self.ship_speed_factor *= self.speedup_scale                
         self.bullet_speed_factor *= self.speedup_scale 
-        self.alien_speed_factor *= self.speedup_scale 
+        self.alien_speed_factor *= self.speedup_scale
+
+        self.alien_points = int(self.alien_points * self.score_scale)
